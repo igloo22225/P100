@@ -1,0 +1,39 @@
+Export list example:
+
+add action=accept chain=EXPORT-global comment="The list of prefixes that is allowed out" prefix=127.0.0.1/32
+add action=accept chain=EXPORT-global prefix=::/128
+add action=reject chain=EXPORT-global
+
+
+Sanity check (use as part of a match rule which rejects later - don't just use these as import filters!):
+
+add action=accept bgp-as-path-length=100-4294967295 chain=sanity-check comment="Reject long AS paths"
+add action=accept bgp-as-path="(64[4-5][0-9][0-9])" chain=sanity-check comment="Reject private ASNs"
+add action=accept bgp-as-path="(174|209|701|702|1239|1299|2914|3257|3320|3356|3549|3561|4134|5511|6453|6461|6762|7018)" chain=sanity-check-notransit \
+    comment="Reject T1s on peering sessions"
+add action=accept chain=sanity-check comment="Block v4 bogons" prefix=0.0.0.0/8 prefix-length=8-32
+add action=accept chain=sanity-check prefix=0.0.0.0/8 prefix-length=8-32
+add action=accept chain=sanity-check prefix=10.0.0.0/8 prefix-length=8-32
+add action=accept chain=sanity-check prefix=100.64.0.0/10 prefix-length=10-32
+add action=accept chain=sanity-check prefix=127.0.0.0/8 prefix-length=8-32
+add action=accept chain=sanity-check prefix=169.254.0.0/16 prefix-length=16-32
+add action=accept chain=sanity-check prefix=172.16.0.0/12 prefix-length=12-32
+add action=accept chain=sanity-check prefix=192.0.2.0/24 prefix-length=24-32
+add action=accept chain=sanity-check prefix=192.88.99.0/24 prefix-length=24-32
+add action=accept chain=sanity-check prefix=192.168.0.0/16 prefix-length=16-32
+add action=accept chain=sanity-check prefix=198.18.0.0/15 prefix-length=15-32
+add action=accept chain=sanity-check prefix=198.51.100.0/24 prefix-length=24-32
+add action=accept chain=sanity-check prefix=203.0.113.0/24 prefix-length=24-32
+add action=accept chain=sanity-check prefix=224.0.0.0/4 prefix-length=4-32
+add action=accept chain=sanity-check prefix=240.0.0.0/4 prefix-length=4-32
+add action=accept chain=sanity-check comment="Block v6 bogons" prefix=::/8 prefix-length=8-128
+add action=accept chain=sanity-check prefix=100::/64 prefix-length=64-128
+add action=accept chain=sanity-check prefix=2001:2::/48 prefix-length=48-128
+add action=accept chain=sanity-check prefix=2001:10::/28 prefix-length=28-128
+add action=accept chain=sanity-check prefix=2001:db8::/32 prefix-length=32-128
+add action=accept chain=sanity-check prefix=2002::/16 prefix-length=16-128
+add action=accept chain=sanity-check prefix=3ffe::/16 prefix-length=16-128
+add action=accept chain=sanity-check prefix=fc00::/7 prefix-length=7-128
+add action=accept chain=sanity-check prefix=fe80::/10 prefix-length=10-128
+add action=accept chain=sanity-check prefix=fec0::/10 prefix-length=10-128
+add action=accept chain=sanity-check prefix=ff00::/8 prefix-length=8-128
