@@ -512,7 +512,7 @@ func addPeer() {
 	fmt.Print("Adding base prefix list...")
 	runSSHCommand(sshClient, "/routing filter add action=discard chain=\"IMPORT-"+asn+"\" match-chain=\"sanity-check\"")
 	runSSHCommand(sshClient, "/routing filter add action=discard chain=\"IMPORT-"+asn+"\" match-chain=\"sanity-check-notransit\"")
-	runSSHCommand(sshClient, "/routing filter add chain=\"IMPORT-"+asn+"\" set-bgp-local-pref=250")
+	runSSHCommand(sshClient, "/routing filter add chain=\"IMPORT-"+asn+"\" set-bgp-local-pref=250 set-distance=15")
 	runSSHCommand(sshClient, "/routing filter add action=accept chain=\"IMPORT-"+asn+"\" match-chain="+asn+"PREFIXES")
 	runSSHCommand(sshClient, "/routing filter add action=discard chain=\"IMPORT-"+asn+"\"")
 	fmt.Println("done.")
