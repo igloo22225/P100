@@ -519,16 +519,16 @@ func addPeer() {
 	fmt.Print("Turning up session and cleaning up...")
 	if v4 != "" {
 		if md5 == "" {
-			runSSHCommand(sshClient, "/routing bgp peer add in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv4+" name="+asn+"v4 out-filter=\"EXPORT-global\" remote-address=30.10.2.106 remote-as="+asn+" ttl=default")
+			runSSHCommand(sshClient, "/routing bgp peer add in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv4+" name="+asn+"v4 out-filter=\"EXPORT-global\" remote-address="+v4+" remote-as="+asn+" ttl=default")
 		} else {
-			runSSHCommand(sshClient, "/routing bgp peer add in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv4+" name="+asn+"v4 out-filter=\"EXPORT-global\" remote-address=30.10.2.106 remote-as="+asn+" tcp-md5-key="+md5+" ttl=default")
+			runSSHCommand(sshClient, "/routing bgp peer add in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv4+" name="+asn+"v4 out-filter=\"EXPORT-global\" remote-address="+v4+" remote-as="+asn+" tcp-md5-key="+md5+" ttl=default")
 		}
 	}
 	if v6 != "" {
 		if md5 == "" {
-			runSSHCommand(sshClient, "/routing bgp peer add address-families=ipv6 in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv6+" name="+asn+"v6 out-filter=\"EXPORT-global\" remote-address=2a0b:6b81::2 remote-as="+asn+" ttl=default")
+			runSSHCommand(sshClient, "/routing bgp peer add address-families=ipv6 in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv6+" name="+asn+"v6 out-filter=\"EXPORT-global\" remote-address="+v6+" remote-as="+asn+" ttl=default")
 		} else {
-			runSSHCommand(sshClient, "/routing bgp peer add address-families=ipv6 in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv6+" name="+asn+"v6 out-filter=\"EXPORT-global\" remote-address=2a0b:6b81::2 remote-as="+asn+" tcp-md5-key="+md5+" ttl=default")
+			runSSHCommand(sshClient, "/routing bgp peer add address-families=ipv6 in-filter=\"IMPORT-"+asn+"\" instance=ix max-prefix-limit="+maxv6+" name="+asn+"v6 out-filter=\"EXPORT-global\" remote-address="+v6+" remote-as="+asn+" tcp-md5-key="+md5+" ttl=default")
 		}
 	}
 	emptyAllQueues(db)
